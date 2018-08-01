@@ -1,15 +1,10 @@
 import { HELLOWORLD } from '../../actions/helloworld/helloWorldAction';
+import initialState from '../initialState';
 
-const init_state = {
-  data: '',
-  loading: true,
-  error: false
-};
-
-export const helloWorldReducer = (state = init_state, action) => {
+export const helloWorldReducer = (state = initialState.helloworld, action) => {
   switch (action.type) {
     case HELLOWORLD: {
-      return Object.assign({}, state, { data: action.payload });
+      return Object.assign({}, state, { data: action.payload, loading: false });
     }
     default:
       return state;

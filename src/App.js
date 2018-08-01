@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import HelloWorldPage from './components/helloworld/helloworldPage';
-
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import HelloWorldPage from './components/helloworld/HelloWorldPage';
 
 export default class App extends Component {
   render() {

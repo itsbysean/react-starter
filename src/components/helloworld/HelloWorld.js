@@ -16,7 +16,11 @@ export default class HelloWorld extends Component {
 
   render() {
     const { helloworld } = this.props;
-    return <div>{helloworld.data}</div>;
+    return (
+      <div>
+        <span style={{ marginLeft: '40px' }}>{helloworld.data}</span>
+      </div>
+    );
   }
 }
 

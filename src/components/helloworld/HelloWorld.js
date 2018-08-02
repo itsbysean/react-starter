@@ -22,9 +22,8 @@ export default class HelloWorld extends Component {
 
 HelloWorld.propTypes = {
   hellworld: PropTypes.shape({
-    data: PropTypes.string,
-    loading: PropTypes.bool,
-    error: PropTypes.bool
-  }),
-  getHelloWorld: PropTypes.func
+    data: PropTypes.string.isRequired,
+    loading: PropTypes.bool.isRequired,
+    error: PropTypes.bool.isRequired
+  })
 };

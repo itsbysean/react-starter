@@ -3,6 +3,11 @@ const initialState = {
     data: '',
     loading: true,
     error: false
+  },
+  posts: {
+    data: [],
+    loading: true,
+    error: false
   }
 };
 

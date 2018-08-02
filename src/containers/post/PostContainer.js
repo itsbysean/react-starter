@@ -3,55 +3,55 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { getHelloWorld } from '../../actions/helloworld/helloWorldAction';
+import { fetchPosts } from '../../actions/post/postAction';
 
-class HelloWorldContainer extends Component {
+class PostContainer extends Component {
   constructor(props) {
     super(props);
   }
 
   static defaultProps = {
-    helloworld: {
-      data: '',
+    posts: {
+      data: [],
       loading: true,
       error: false
     }
   };
 
   componentDidMount() {
-    const { getHelloWorld } = this.props;
-    getHelloWorld();
+    const { fetchPosts } = this.props;
+    fetchPosts();
   }
 
   render() {
-    const { children, helloworld } = this.props;
+    const { children, posts } = this.props;
     const newProps = {
-      helloworld
+      posts
     };
     return React.cloneElement(children, { ...newProps });
   }
 }
 
-HelloWorldContainer.propTypes = {
-  hellworld: PropTypes.shape({
-    data: PropTypes.string.isRequired,
+PostContainer.propTypes = {
+  posts: PropTypes.shape({
+    data: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired
   }),
-  getHelloWorld: PropTypes.func.isRequired
+  fetchPosts: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ helloworld }) => {
+const mapStateToProps = ({ posts }) => {
   return {
-    helloworld
+    posts
   };
 };
 
 const mapDispatchToProps = {
-  getHelloWorld
+  fetchPosts
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(HelloWorldContainer);
+)(PostContainer);

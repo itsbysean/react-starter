@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class HelloWorld extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   static defaultProps = {
     helloworld: {
       data: '',

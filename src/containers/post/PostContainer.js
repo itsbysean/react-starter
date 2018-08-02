@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../../actions/post/postAction';
 
 class PostContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   static defaultProps = {
     posts: {
       data: [],

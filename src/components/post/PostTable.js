@@ -30,18 +30,22 @@ export default class PostTable extends Component {
   buildTable = data => {
     return (
       <table style={style.table}>
-        <tr>
-          <th style={style.td_th}>TITLE</th>
-          <th style={style.td_th}>USER</th>
-          <th style={style.td_th}>CONTENT</th>
-        </tr>
-        {data.map(obj => (
-          <tr id={obj.id}>
-            <td style={style.td_th}>{obj.title}</td>
-            <td style={style.td_th}>{obj.userId}</td>
-            <td style={style.td_th}>{obj.body}</td>
+        <thead>
+          <tr>
+            <th style={style.td_th}>TITLE</th>
+            <th style={style.td_th}>USER</th>
+            <th style={style.td_th}>CONTENT</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {data.map((obj, idx) => (
+            <tr key={idx}>
+              <td style={style.td_th}>{obj.title}</td>
+              <td style={style.td_th}>{obj.userId}</td>
+              <td style={style.td_th}>{obj.body}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     );
   };

@@ -11,7 +11,6 @@ export const postReducer = (state = initialState.posts, action) => {
       return Object.assign({}, state, { loading: true });
     }
     case POST_FETCH_SUCCESS: {
-      console.log(action.payload);
       return Object.assign({}, state, {
         data: action.payload,
         loading: false

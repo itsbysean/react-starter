@@ -6,10 +6,6 @@ import { connect } from 'react-redux';
 import { getHelloWorld } from '../../actions/helloworld/helloWorldAction';
 
 class HelloWorldContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   static defaultProps = {
     helloworld: {
       data: '',

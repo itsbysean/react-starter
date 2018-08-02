@@ -25,10 +25,6 @@ const styles = theme => ({
 });
 
 class PostTable extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   static defaultProps = {
     posts: {
       data: [],

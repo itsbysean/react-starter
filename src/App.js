@@ -1,26 +1,44 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import HelloWorldPage from './components/helloworld/HelloWorldPage';
-import PostPage from './components/post/PostPage';
+import { Switch, Route } from 'react-router-dom';
 
-export default class App extends Component {
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MainLayout from './components/layout/MainLayout';
+import LoginLayout from './components/layout/LoginLayout';
+
+import withRoot from './withRoot';
+
+class App extends Component {
+  state = {
+    open: false
+  };
+
+  handleDrawerOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleDrawerClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     return (
-      <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/helloworld">Hello World Page</Link>
-            </li>
-            <li>
-              <Link to="/post">Posts</Link>
-            </li>
-          </ul>
-          <hr />
-          <Route exact path="/helloworld" component={HelloWorldPage} />
-          <Route exact path="/post" component={PostPage} />
-        </div>
-      </Router>
+      <React.Fragment>
+        <CssBaseline />
+        <Switch>
+          <Route exact path="/login" component={LoginLayout} />
+          <Route
+            render={() => (
+              <MainLayout
+                handleDrawerOpen={this.handleDrawerOpen}
+                handleDrawerClose={this.handleDrawerClose}
+                isOpenDrawer={this.state.open}
+              />
+            )}
+          />
+        </Switch>
+      </React.Fragment>
     );
   }
 }
+
+export default withRoot(App);

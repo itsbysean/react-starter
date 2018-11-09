@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-const style = {
+const styles = theme => ({
   table: {
-    borderCollapse: 'collapse',
-    width: '100%'
+    minWidth: 700
   },
-  td_th: {
-    border: '1px solid #dddddd',
-    textAlign: 'left',
-    padding: '8px'
+  head: {
+    whiteSpace: 'nowrap'
   }
-};
+});
 
-export default class PostTable extends Component {
-  constructor(props) {
-    super(props);
-    this.buildTable = this.buildTable.bind(this);
-  }
-
+class PostTable extends Component {
   static defaultProps = {
     posts: {
       data: [],
@@ -27,39 +26,40 @@ export default class PostTable extends Component {
     }
   };
 
-  buildTable = data => {
-    return (
-      <table style={style.table}>
-        <thead>
-          <tr>
-            <th style={style.td_th}>TITLE</th>
-            <th style={style.td_th}>USER</th>
-            <th style={style.td_th}>CONTENT</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((obj, idx) => (
-            <tr key={idx}>
-              <td style={style.td_th}>{obj.title}</td>
-              <td style={style.td_th}>{obj.userId}</td>
-              <td style={style.td_th}>{obj.body}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  };
-
   render() {
-    const { posts } = this.props;
-    return this.buildTable(posts.data);
+    const { posts, classes } = this.props;
+    return (
+      <Paper>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell className={classes.head}>TITLE</TableCell>
+              <TableCell className={classes.head}>USER ID</TableCell>
+              <TableCell className={classes.head}>CONTENT</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {posts.data.map(post => (
+              <TableRow key={post.id}>
+                <TableCell>{post.title}</TableCell>
+                <TableCell>{post.userId}</TableCell>
+                <TableCell>{post.body}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+    );
   }
 }
 
 PostTable.propTypes = {
+  classes: PropTypes.object.isRequired,
   posts: PropTypes.shape({
     data: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired
   })
 };
+
+export default withStyles(styles)(PostTable);

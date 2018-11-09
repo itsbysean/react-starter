@@ -1,1 +1,2 @@
-## React Redux Material-ui-v1 Starter
+## React Redux Material-ui-v3 Starter
+## Simple Dashboard

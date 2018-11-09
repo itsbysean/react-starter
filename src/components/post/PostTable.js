@@ -8,14 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import withRoot from '../../withRoute';
-
 const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto'
-  },
   table: {
     minWidth: 700
   },
@@ -36,7 +29,7 @@ class PostTable extends Component {
   render() {
     const { posts, classes } = this.props;
     return (
-      <Paper className={classes.root}>
+      <Paper>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
@@ -69,4 +62,4 @@ PostTable.propTypes = {
   })
 };
 
-export default withRoot(withStyles(styles)(PostTable));
+export default withStyles(styles)(PostTable);

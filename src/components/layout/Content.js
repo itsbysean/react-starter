@@ -9,8 +9,8 @@ const Content = props => {
   return (
     <main className={classes.content}>
       <Switch>
-        <Route exact path="/post" component={PostPage} />
-        <Redirect exact from="/" to="/post" />
+        <Route exact path="/dashboard" component={PostPage} />
+        <Redirect exact from="/" to="/dashboard" />
         <Route exact path="*" component={NoMatch} />
       </Switch>
     </main>

@@ -41,7 +41,7 @@ class SideMenu extends Component {
         <Divider />
         <List>
           <div>
-            <ListItem onClick={() => history.push('/post')} button>
+            <ListItem onClick={() => history.push('/dashboard')} button>
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>

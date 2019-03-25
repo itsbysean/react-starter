@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -35,6 +36,28 @@ const styles = theme => ({
 });
 
 class LoginForm extends Component {
+  static defaultProps = {
+    login: () => {}
+  };
+
+  state = {
+    username: '',
+    password: ''
+  };
+
+  setUsername = username => {
+    this.setState({ username });
+  };
+
+  setPassword = password => {
+    this.setState({ password });
+  };
+
+  submit = () => {
+    const { username, password } = this.state;
+    this.props.login(username, password);
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -48,7 +71,13 @@ class LoginForm extends Component {
         <div className={classes.form}>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Username</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
+            <Input
+              id="email"
+              name="email"
+              autoComplete="email"
+              onChange={e => this.setUsername(e.target.value)}
+              autoFocus
+            />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
@@ -56,6 +85,7 @@ class LoginForm extends Component {
               name="password"
               type="password"
               id="password"
+              onChange={e => this.setPassword(e.target.value)}
               autoComplete="current-password"
             />
           </FormControl>
@@ -68,6 +98,7 @@ class LoginForm extends Component {
             fullWidth
             variant="contained"
             color="primary"
+            onClick={() => this.submit()}
             className={classes.submit}
           >
             Sign in
@@ -78,4 +109,7 @@ class LoginForm extends Component {
   }
 }
 
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired
+};
 export default withStyles(styles)(LoginForm);

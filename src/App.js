@@ -1,11 +1,33 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import _ from 'lodash';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MainLayout from './components/layout/MainLayout';
 import LoginLayout from './components/layout/LoginLayout';
 
 import withRoot from './withRoot';
+
+function SecuredRoute({ isAuthenticated, render }) {
+  return (
+    <Route
+      render={props =>
+        isAuthenticated ? (
+          render()
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
 
 class App extends Component {
   state = {
@@ -21,12 +43,14 @@ class App extends Component {
   };
 
   render() {
+    const { token } = this.props.auth.data;
     return (
       <React.Fragment>
         <CssBaseline />
         <Switch>
           <Route exact path="/login" component={LoginLayout} />
-          <Route
+          <SecuredRoute
+            isAuthenticated={!_.isEmpty(token)}
             render={() => (
               <MainLayout
                 handleDrawerOpen={this.handleDrawerOpen}
@@ -41,4 +65,10 @@ class App extends Component {
   }
 }
 
-export default withRoot(App);
+const mapStateToProps = ({ auth }) => {
+  return {
+    auth
+  };
+};
+
+export default connect(mapStateToProps)(withRoot(App));

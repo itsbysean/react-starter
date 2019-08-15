@@ -15,23 +15,22 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
   paper: {
-    marginTop: theme.spacing.unit * 8,
+    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-      .spacing.unit * 3}px`
+    padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`
   },
   avatar: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing(1)
   },
   submit: {
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing(3)
   }
 });
 

@@ -1,27 +1,32 @@
 import { RSAA } from 'redux-api-middleware';
 import { push } from 'connected-react-router';
 
-import { AUTH_API } from '../common/symbol/authSymbol';
+import { PUBLIC } from '../common/symbol/authSymbol';
 import { LOGOUT_REQUEST } from '../actions/auth/authAction';
+
+import _ from 'lodash';
 
 export const authMiddleware = store => next => action => {
   if (action.type === LOGOUT_REQUEST) {
     store.dispatch(push('/login'));
   } else {
     const { auth } = store.getState();
-    const request = action[AUTH_API];
-
-    if (typeof request === 'undefined') {
-      return next(action);
+    const unsecureApi = action[PUBLIC];
+    if (!_.isNil(unsecureApi)) {
+      // unsecure api call
+      return next(unsecureApi);
     } else {
-      const { token } = auth.data;
-      if (token) {
-        const apiRequest = request[RSAA];
-        apiRequest.headers = { Authorization: 'Bearer ' + token };
-        return next(request);
-      } else {
-        store.dispatch(push('/login'));
+      const secureApi = action[RSAA];
+      if (!_.isNil(secureApi)) {
+        // default secure api call
+        const { token } = auth.data;
+        if (!_.isNil(token)) {
+          secureApi['Authorization'] = 'Bearer ' + token;
+        } else {
+          store.dispatch(push('/login'));
+        }
       }
+      return next(action);
     }
   }
 };

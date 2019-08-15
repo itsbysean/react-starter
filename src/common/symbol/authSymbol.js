@@ -1,1 +1,1 @@
-export const AUTH_API = Symbol('OAuth2 protected API');
+export const PUBLIC = Symbol('Authorization not required API');

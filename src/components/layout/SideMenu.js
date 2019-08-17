@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 import classNames from 'classnames';
 import List from '@material-ui/core/List';
@@ -15,13 +17,15 @@ import Divider from '@material-ui/core/Divider';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
+import { logout } from '../../actions/auth/authAction.js';
+
 class SideMenu extends Component {
   state = {
     open: false
   };
 
   render() {
-    const { classes, handleDrawerClose, open, history } = this.props;
+    const { classes, handleDrawerClose, open, push, logout } = this.props;
     return (
       <Drawer
         variant="permanent"
@@ -41,13 +45,13 @@ class SideMenu extends Component {
         <Divider />
         <List>
           <div>
-            <ListItem onClick={() => history.push('/dashboard')} button>
+            <ListItem onClick={() => push('/dashboard')} button>
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItem>
-            <ListItem onClick={() => history.push('/login')} button>
+            <ListItem onClick={() => logout()} button>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
@@ -61,7 +65,24 @@ class SideMenu extends Component {
 }
 
 SideMenu.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
-export default withRouter(SideMenu);
+const mapStateToProps = ({ auth }) => {
+  return {
+    auth
+  };
+};
+
+const mapDispatchToProps = {
+  logout,
+  push
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SideMenu)
+);

@@ -54,11 +54,13 @@ class LoginForm extends Component {
 
   submit = () => {
     const { username, password } = this.state;
-    this.props.login(username, password);
+    if (username && password) {
+      this.props.login(username, password);
+    }
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, error } = this.props;
     return (
       <Paper className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -75,6 +77,7 @@ class LoginForm extends Component {
               name="email"
               autoComplete="email"
               onChange={e => this.setUsername(e.target.value)}
+              error={error}
               autoFocus
             />
           </FormControl>
@@ -85,6 +88,7 @@ class LoginForm extends Component {
               type="password"
               id="password"
               onChange={e => this.setPassword(e.target.value)}
+              error={error}
               autoComplete="current-password"
             />
           </FormControl>

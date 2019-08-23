@@ -27,7 +27,8 @@ class LoginContainer extends Component {
   render() {
     const { children, login, auth } = this.props;
     const loginFormProps = {
-      login
+      login,
+      error: auth.error
     };
     return React.cloneElement(children, { ...loginFormProps });
   }

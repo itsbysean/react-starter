@@ -5,7 +5,7 @@ import { PUBLIC } from '../common/symbol/authSymbol';
 
 import _ from 'lodash';
 
-export const authMiddleware = store => next => action => {
+export const preMiddleware = store => next => action => {
   const { auth } = store.getState();
   const unsecureApi = action[PUBLIC];
   if (!_.isNil(unsecureApi)) {

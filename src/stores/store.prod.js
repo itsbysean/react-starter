@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { apiMiddleware } from 'redux-api-middleware';
-import { authMiddleware } from './authMiddleware';
+import { preMiddleware } from './preMiddleware';
 
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -18,7 +18,7 @@ const persistConfig = {
 };
 
 const enhancers = [];
-const middleware = [authMiddleware, apiMiddleware, routerMiddleware(history)];
+const middleware = [preMiddleware, apiMiddleware, routerMiddleware(history)];
 
 const composedEnhancers = compose(
   applyMiddleware(...middleware),

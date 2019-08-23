@@ -15,7 +15,8 @@ export const history = createBrowserHistory();
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
+  blacklist: ['router']
 };
 
 const devEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

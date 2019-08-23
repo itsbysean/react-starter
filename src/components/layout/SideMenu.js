@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
@@ -80,9 +79,7 @@ const mapDispatchToProps = {
   push
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(SideMenu)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SideMenu);

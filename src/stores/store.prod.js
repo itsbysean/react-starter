@@ -14,7 +14,8 @@ export const history = createBrowserHistory();
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
+  blacklist: ['router']
 };
 
 const enhancers = [];

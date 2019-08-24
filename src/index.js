@@ -8,6 +8,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { ConnectedRouter } from 'connected-react-router';
 import { store, persistor, history } from './stores/configureStore';
 
+import { SnackbarProvider } from 'notistack';
+
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -16,7 +18,9 @@ ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <ConnectedRouter history={history}>
-        <App />
+        <SnackbarProvider>
+          <App />
+        </SnackbarProvider>
       </ConnectedRouter>
     </PersistGate>
   </Provider>,

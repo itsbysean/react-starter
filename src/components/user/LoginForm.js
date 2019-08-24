@@ -54,9 +54,7 @@ class LoginForm extends Component {
 
   submit = () => {
     const { username, password } = this.state;
-    if (username && password) {
-      this.props.login(username, password);
-    }
+    this.props.login(username, password);
   };
 
   render() {

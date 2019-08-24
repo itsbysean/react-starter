@@ -19,7 +19,7 @@ export const loginReducer = (state = initialState.auth, action) => {
     }
     case LOGIN_FAILURE: {
       return Object.assign({}, state, {
-        data: {},
+        data: action.payload,
         loading: false,
         error: true
       });

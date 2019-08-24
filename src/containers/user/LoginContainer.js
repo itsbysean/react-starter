@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
+import { withSnackbar } from 'notistack';
 
 import _ from 'lodash';
 
@@ -22,6 +23,15 @@ class LoginContainer extends Component {
     if (!_.isEmpty(token)) {
       this.props.push('/dashboard');
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { error, data } = nextProps.auth;
+    if (error) {
+      const { message } = data;
+      this.props.enqueueSnackbar(message, { variant: 'error' });
+    }
+    return true;
   }
 
   render() {
@@ -57,4 +67,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginContainer);
+)(withSnackbar(LoginContainer));

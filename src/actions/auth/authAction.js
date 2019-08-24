@@ -6,6 +6,16 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 
 export const login = (username, password) => {
   // fake action
+
+  if (!username || !password) {
+    return {
+      type: LOGIN_FAILURE,
+      payload: {
+        message: 'username and password cannot be empty.'
+      }
+    };
+  }
+
   if (username === 'admin' && password === 'admin') {
     return {
       type: LOGIN_SUCCESS,
@@ -13,7 +23,10 @@ export const login = (username, password) => {
     };
   } else {
     return {
-      type: LOGIN_FAILURE
+      type: LOGIN_FAILURE,
+      payload: {
+        message: 'Invalid username / password'
+      }
     };
   }
 };

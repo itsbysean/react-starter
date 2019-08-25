@@ -1,3 +1,5 @@
+import { Map } from 'immutable';
+
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -8,23 +10,21 @@ import initialState from '../initialState';
 
 export const loginReducer = (state = initialState.auth, action) => {
   switch (action.type) {
-    case LOGOUT_REQUEST: {
+    case LOGOUT_REQUEST:
       return initialState.auth;
-    }
-    case LOGIN_SUCCESS: {
-      return Object.assign({}, state, {
-        data: action.payload,
-        loading: false
-      });
-    }
-    case LOGIN_FAILURE: {
-      return Object.assign({}, state, {
-        data: action.payload,
-        loading: false,
-        error: true
-      });
-    }
     case LOGIN_REQUEST:
+      return Map(state)
+        .set('loading', true)
+        .toJS();
+    case LOGIN_SUCCESS:
+      return Map(initialState.auth)
+        .set('data', action.payload)
+        .toJS();
+    case LOGIN_FAILURE:
+      return Map(initialState.auth)
+        .set('data', action.payload)
+        .set('error', true)
+        .toJS();
     default:
       return state;
   }

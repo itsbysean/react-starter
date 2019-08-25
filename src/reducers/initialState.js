@@ -1,7 +1,7 @@
 const initialState = {
   auth: {
     data: {},
-    loading: true,
+    loading: false,
     error: false
   },
   posts: {
